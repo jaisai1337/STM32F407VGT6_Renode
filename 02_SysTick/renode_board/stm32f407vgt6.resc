@@ -25,6 +25,6 @@ sysbus LoadELF @./build/SYSTICK.elf
 machine StartGdbServer 1234 True
 
 # For debugging disable start
-# start
+start
 
 # emulation GetTimeSourceInfo
