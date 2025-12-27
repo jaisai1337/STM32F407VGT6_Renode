@@ -64,7 +64,8 @@ renode renode_board/stm32f407vgt6.resc
 
 Note: The delay function uses a blocking loop. Simulation speed depends on your host machine.
 
-### 📝 Code Explanation
+## 📝 Code Explanation
+
 The core logic resides in main.c. It bypasses HAL to manipulate registers directly:
 
 * RCC Setup: Enables the AHB1 clock for GPIOD.
