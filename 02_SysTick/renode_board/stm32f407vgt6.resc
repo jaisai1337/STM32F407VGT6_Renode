@@ -11,18 +11,11 @@ machine LoadPlatformDescription @./renode_board/stm32f407_discovery.repl
 # Apply SVD
 # sysbus ApplySVD @./STM32F407.svd
 
-# Initialize LEDs 12-15 on GPIOD 
+# Initialize LEDs 12
 machine LoadPlatformDescriptionFromString "led12: Miscellaneous.LED @ sysbus; gpioPortD: { 12 -> led12@0 }"
 
 # Enable verbose logging to see every state change
 logLevel -1 sysbus.led12
-
-# Create a Button named "userButton" and wire it to Port A, Pin 0
-machine LoadPlatformDescriptionFromString "userButton: Miscellaneous.Button @ sysbus { IRQ -> gpioPortA@0 }"
-
-# sysbus.gpioPortA OnGPIO 0 true
-# sysbus.gpioPortA OnGPIO 0 false 
-
 
 
 # Load the firmware
