@@ -1,0 +1,37 @@
+:name: STM32F407
+:description: This script runs the firmware on STM32F4 Discovery.
+
+using sysbus
+$name?="STM32F407_Discovery"
+mach create $name
+
+# Load the base platform
+machine LoadPlatformDescription @./renode_board/stm32f407_discovery.repl
+
+# Apply SVD
+# sysbus ApplySVD @./STM32F407.svd
+
+# Initialize LEDs 12-15 on GPIOD 
+machine LoadPlatformDescriptionFromString "led12: Miscellaneous.LED @ sysbus; gpioPortD: { 12 -> led12@0 }"
+machine LoadPlatformDescriptionFromString "led13: Miscellaneous.LED @ sysbus; gpioPortD: { 13 -> led13@0 }"
+machine LoadPlatformDescriptionFromString "led14: Miscellaneous.LED @ sysbus; gpioPortD: { 14 -> led14@0 }"
+machine LoadPlatformDescriptionFromString "led15: Miscellaneous.LED @ sysbus; gpioPortD: { 15 -> led15@0 }"
+
+# Enable verbose logging to see every state change
+logLevel -1 sysbus.led12
+logLevel -1 sysbus.led13
+logLevel -1 sysbus.led14
+logLevel -1 sysbus.led15
+
+
+# Load the firmware
+sysbus LoadELF @./build/BASECODE.elf
+
+# StartGdbServer on port 1234
+machine StartGdbServer 1234 True
+
+# For debugging disable start
+start
+
+
+# emulation GetTimeSourceInfo
