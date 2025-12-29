@@ -1,4 +1,4 @@
-# STM32F407 USART2 TX (Hello World)
+# STM32F407 USART2 RX (Echo)
 
 ![Language](https://img.shields.io/badge/language-C-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-STM32F407-green.svg)
