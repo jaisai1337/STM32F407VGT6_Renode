@@ -1,0 +1,29 @@
+:name: STM32F407
+:description: This script runs the firmware on STM32F4 Discovery.
+
+using sysbus
+$name?="STM32F407_Discovery"
+mach create $name
+
+# Load the base platform
+machine LoadPlatformDescription @./renode_board/stm32f407_discovery.repl
+
+# Apply SVD
+# sysbus ApplySVD @./STM32F407.svd
+
+
+
+# Load the firmware
+sysbus LoadELF @./build/UART_TX.elf
+
+# StartGdbServer on port 1234
+machine StartGdbServer 1234 True
+
+
+showAnalyzer sysbus.usart2
+
+# For debugging disable start
+start
+
+
+# emulation GetTimeSourceInfo
